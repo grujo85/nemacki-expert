@@ -3,6 +3,15 @@ import requests
 from deep_translator import GoogleTranslator
 from PIL import Image, ImageOps, ImageEnhance
 import pytesseract
+import os  # OBAVEZNO DODAJ OVAJ UVOZ AKO GA NEMA
+
+# ================================================================
+# <<< OVDE UBACUJEŠ KOD ZA RENDER >>>
+# Ovo govori programu gde se Tesseract nalazi kada se aplikacija pokrene na Renderu
+# ================================================================
+if os.environ.get('RENDER'):
+    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+# ================================================================
 
 app = Flask(__name__)
 
