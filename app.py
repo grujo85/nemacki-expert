@@ -9,9 +9,26 @@ import os  # OBAVEZNO DODAJ OVAJ UVOZ AKO GA NEMA
 # <<< OVDE UBACUJEŠ KOD ZA RENDER >>>
 # Ovo govori programu gde se Tesseract nalazi kada se aplikacija pokrene na Renderu
 # ================================================================
+# Pametno mapiranje Tesseract putanje za Render servere
 if os.environ.get('RENDER'):
-    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
-# ================================================================
+    Moguće_putanje = [
+        '/usr/bin/tesseract',
+        '/usr/local/bin/tesseract',
+        '/opt/render/project/src/venv/bin/tesseract'
+    ]
+    tesseract_pronadjen = False
+    for putanja in moguće_putanje:
+        if os.path.exists(putanja):
+            pytesseract.pytesseract.tesseract_cmd = putanja
+            tesseract_pronadjen = True
+            break
+            
+    # Ako sistemski APT zakaže, probaj da ga nađeš preko sistemske komande
+    if not tesseract_pronadjen:
+        import shutil
+        sistemska_putanja = shutil.which('tesseract')
+        if sistemska_putanja:
+            pytesseract.pytesseract.tesseract_cmd = sistemska_putanja
 
 app = Flask(__name__)
 
