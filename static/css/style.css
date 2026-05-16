@@ -1,0 +1,62 @@
+body { 
+    margin: 0; padding: 20px; display: flex; flex-direction: column; 
+    align-items: center; min-height: 100vh; font-family: 'Segoe UI', sans-serif; 
+    transition: 0.8s;
+}
+.main-wrapper {
+    display: flex; align-items: flex-start; justify-content: center; gap: 20px;
+    max-width: 1350px; width: 100%; flex: 1; padding-top: 20px;
+}
+.container, .legenda, .prevodilac-box { 
+    backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.92);
+    border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-sizing: border-box;
+}
+.container { padding: 40px; text-align: center; width: 440px; }
+.legenda { padding: 25px; width: 240px; border-top: 6px solid #222; }
+
+/* STIL NOVE KUTIJE PREVODIOCA */
+.prevodilac-box { padding: 30px; width: 340px; text-align: center; }
+.prevodilac-naslov { font-size: 18px; font-weight: bold; color: #222; }
+.prevodilac-box select, .prevodilac-box textarea {
+    width: 100%; border: 2px solid rgba(0,0,0,0.1); border-radius: 12px;
+    padding: 12px; box-sizing: border-box; font-family: inherit; outline: none; font-size: 14px;
+}
+.prevodilac-box textarea { height: 110px; resize: none; margin-top: 10px; }
+.btn-prevod { width: 100%; padding: 14px; background: #222; color: #fff; font-weight: bold; border-radius: 12px; border: none; cursor: pointer; margin-top: 10px;}
+.btn-prevod:hover { background: #444; }
+
+.file-label {
+    background: #e0e0e0; padding: 10px 14px; border-radius: 10px;
+    font-size: 13px; font-weight: bold; cursor: pointer; display: inline-block; margin-top: 5px;
+}
+.file-label:hover { background: #d5d5d5; }
+
+/* KALKULATOR ELEMENTI */
+input { 
+    padding: 15px; width: 60%; border: 2px solid rgba(0,0,0,0.1); 
+    border-radius: 12px; outline: none; font-size: 16px; background: rgba(255,255,255,0.8);
+}
+button { 
+    padding: 15px 25px; border-radius: 12px; border: none; 
+    background: #222; color: white; cursor: pointer; font-weight: bold;
+}
+table { 
+    width: 100%; margin-top: 25px; border-collapse: collapse; 
+    background: rgba(255, 255, 255, 0.5); border-radius: 15px; overflow: hidden; 
+}
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05); }
+th { background: rgba(0,0,0,0.05); font-size: 12px; }
+.audio-icon { font-size: 50px; cursor: pointer; display: inline-block; transition: 0.2s; }
+.main-word { font-size: 42px; margin: 5px 0; }
+.example-box { margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.03); border-radius: 10px; font-style: italic; }
+.stavka { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 10px; margin-bottom: 8px; font-weight: bold; }
+.m-rod { background: #e3f2fd; color: #1e88e5; }
+.f-rod { background: #fce4ec; color: #d81b60; }
+.n-rod { background: #e8f5e9; color: #43a047; }
+.krug { width: 10px; height: 10px; border-radius: 50%; }
+.site-footer { margin-top: auto; padding: 20px; text-align: center; width: 100%; color: white; background: rgba(0,0,0,0.1); backdrop-filter: blur(5px); }
+.site-footer span { font-weight: bold; color: #f3e5f5; }
+
+@media (max-width: 1100px) { .main-wrapper { flex-direction: column; align-items: center; } .container, .legenda, .prevodilac-box { width: 95%; } }
