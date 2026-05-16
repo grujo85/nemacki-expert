@@ -11,6 +11,9 @@ if os.environ.get('RENDER'):
 
 app = Flask(__name__)
 
+# DODAJ OVU LINIJU: Dozvoljava otvaranje slika veličine do 16 megabajta
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
 # ==========================================
 # KALKULATOR IMENICA (TVOJ GLAVNI KOD)
 # ==========================================
