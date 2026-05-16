@@ -9,9 +9,10 @@ import os
 if os.environ.get('RENDER'):
     pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 
-app = Flask(__name__)
+# ISPRAVLJENO: Dodate fiksne putanje za static i templates kako ih Docker ne bi izgubio
+app = Flask(__name__, static_folder='static', template_folder='templates')
 
-# DODAJ OVU LINIJU: Dozvoljava otvaranje slika veličine do 16 megabajta
+# Dozvoljava otvaranje slika veličine do 16 megabajta
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # ==========================================
@@ -97,6 +98,7 @@ def index():
 # ================================================================
 # UNIVERZALNI PREVODILAC
 # ================================================================
+@app.route("/univerzalni_predvod", methods=["POST"])  # Promenjeno privremeno ime rute radi sigurnog keša
 @app.route("/univerzalni_prevod", methods=["POST"])
 def univerzalni_prevod():
     smer = request.form.get("smer", "de-sr")
@@ -138,4 +140,5 @@ def univerzalni_prevod():
         return jsonify({"error": f"Greška na Google prevodiocu: {str(e)}"})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # ISPRAVLJENO: Slušaj na 0.0.0.0 portu unutar Docker okruženja
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)), debug=True)
