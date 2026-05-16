@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nemački Master</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body style="background: {{ 'linear-gradient(135deg, #1e88e5, #64b5f6)' if rezultat and rezultat.clan == 'der' 
                           else 'linear-gradient(135deg, #d81b60, #f06292)' if rezultat and rezultat.clan == 'die'
@@ -82,6 +82,6 @@
     <p>Idejni tvorac: <span>Andrijana Kostić</span> <span class="separator">|</span> Realizacija: <span>Vladimir Grujović</span></p>
 </footer>
 
-<script src="{{ url_for('static', filename='style/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
