@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nemački Master</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+</head>
+<body style="background: {{ 'linear-gradient(135deg, #1e88e5, #64b5f6)' if rezultat and rezultat.clan == 'der' 
+                          else 'linear-gradient(135deg, #d81b60, #f06292)' if rezultat and rezultat.clan == 'die'
+                          else 'linear-gradient(135deg, #43a047, #81c784)' if rezultat and rezultat.clan == 'das'
+                          else '#f0f2f5' }};">
+
+<div class="main-wrapper">
+    <div class="container">
+        <form method="POST">
+            <input type="text" name="rec" placeholder="Srpska reč..." required autofocus>
+            <button type="submit">GO</button>
+        </form>
+
+        {% if rezultat %}
+        <div style="margin-top: 30px;">
+            <div id="audioBtn" class="audio-icon" onclick="speak('{{ rezultat.de }}')">🔊</div>
+            <h1 class="main-word">{{ rezultat.clan }} {{ rezultat.de }}</h1>
+            <p>Množina: <b>die {{ rezultat.mnozina }}</b></p>
+            
+            <table>
+                <thead><tr><th>Padež</th><th>Član / Pokazna</th></tr></thead>
+                <tbody>
+                {% for p, v in rezultat.padezi.items() %}
+                <tr>
+                    <td><b>{{ p[:3] }}.</b></td>
+                    <td style="font-size: 14px;">{{ v }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="example-box">"{{ rezultat.primer }}"</div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="prevodilac-box">
+        <div class="prevodilac-naslov">✨ Prevodilac Teksta i Slika</div>
+        
+        <form id="univerzalniForm" enctype="multipart/form-data" onsubmit="event.preventDefault();" style="margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
+            <select name="smer">
+                <option value="de-sr">Nemački ➔ Srpski</option>
+                <option value="sr-de">Srpski ➔ Nemački</option>
+            </select>
+            
+            <textarea name="tekst_za_prevod" id="tekstZaPrevod" placeholder="Upiši tekst ovde... ILI izaberi sliku ispod..."></textarea>
+            
+            <div style="display: flex; flex-direction: column; gap: 5px; align-items: flex-start;">
+                <label for="slikaFile" class="file-label">📸 Izaberi sliku</label>
+                <input type="file" name="slika_fajl" id="slikaFile" accept="image/*" style="display: none;">
+                <span id="imeSlike" style="font-size: 11px; color: #666; max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Nije izabrana slika</span>
+            </div>
+            
+            <button type="button" class="btn-prevod" onclick="pokreniPrevodjenje()">Prevedi</button>
+        </form>
+
+        <div id="rezultatBox" style="display: none; margin-top: 15px; padding: 14px; background: rgba(0,0,0,0.04); border-radius: 15px; text-align: left;">
+            <div style="font-size: 11px; color: #555; font-weight: bold;">Pronađen originalni tekst:</div>
+            <p id="tekstOriginal" style="margin: 3px 0 12px 0; font-size: 13px; font-style: italic; color: #333; white-space: pre-line; line-height: 1.4;"></p>
+            
+            <div style="font-size: 11px; color: #222; font-weight: bold;">Prevod na srpski:</div>
+            <p id="tekstPrevedeno" style="margin: 3px 0 0 0; font-size: 14px; font-weight: bold; color: #000; white-space: pre-line; line-height: 1.4;"></p>
+        </div>
+    </div>
+
+    <div class="legenda">
+        <div class="legenda-naslov">💡 Podsetnik</div>
+        <div class="stavka m-rod"><div class="krug" style="background:#1e88e5"></div> der — Muški</div>
+        <div class="stavka f-rod"><div class="krug" style="background:#d81b60"></div> die — Ženski</div>
+        <div class="stavka n-rod"><div class="krug" style="background:#43a047"></div> das — Srednji</div>
+        <div class="footer-note">Savet: Uvek uči imenicu sa članom!</div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <p>Idejni tvorac: <span>Andrijana Kostić</span> <span class="separator">|</span> Realizacija: <span>Vladimir Grujović</span></p>
+</footer>
+
+<script src="{{ url_for('static', filename='style/script.js') }}"></script>
+</body>
+</html>
