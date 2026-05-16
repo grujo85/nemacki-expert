@@ -153,7 +153,9 @@ function pokreniPrevodjenje() {
 }
 
 // Funkcija koja bira pametan naglasak (srpski ili nemački) i izgovara ceo prevod rečenice/slike
+// Funkcija koja bira pametan naglasak (srpski ili nemački) i izgovara ceo prevod rečenice/slike
 function procitajPrevod() {
+    // ISPRAVLJENO: Spojen razmak u imenu varijable
     const tekstZaCitanje = document.getElementById('tekstPrevedeno').textContent;
     const smer = document.querySelector('select[name="smer"]').value;
     
@@ -177,6 +179,7 @@ function procitajPrevod() {
         setTimeout(() => btn.style.transform = "scale(1)", 200);
     }
     window.speechSynthesis.speak(msg);
+}
 }
 
 // Čišćenje suprotne forme kako se keširani podaci ne bi mešali pri slanju
